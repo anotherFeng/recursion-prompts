@@ -19,10 +19,9 @@ var factorial = function(n) {
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
   var arrCopy = array.slice(0);
-  var arrLength = arrCopy.length;
-  if(arrLength > 1){
-    var total = arrCopy[arrLength-1] + arrCopy[arrLength-2];
-    arrCopy.splice(arrLength-2, 2, total);
+  var count = arrCopy.length;
+  if(count > 1){
+    arrCopy.splice(count-2, 2, arrCopy[count-1] + arrCopy[count-2]);
     return sum(arrCopy);
   }
   if(array.length === 0){
@@ -34,12 +33,20 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
-  var flattened = array.flatten();
-  return sum(flattened);
+  var result = 0;
+  array.forEach(function(element){
+    if(Array.isArray(element)){
+      result += arraySum(element);
+    } else {
+      result += element;
+    }
+  })
+  return result;
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  
 };
 
 // 5. Sum all integers below a given integer.
