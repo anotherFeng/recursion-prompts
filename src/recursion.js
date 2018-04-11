@@ -18,17 +18,24 @@ var factorial = function(n) {
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
-    var result = 0;
-    var arrCopy = array.slice(0);
-    while(arrCopy.length >= 0){
-        result += arrCopy.splice(0);
-        return sum(arrCopy);
-    }
+  var arrCopy = array.slice(0);
+  var arrLength = arrCopy.length;
+  if(arrLength > 1){
+    var total = arrCopy[arrLength-1] + arrCopy[arrLength-2];
+    arrCopy.splice(arrLength-2, 2, total);
+    return sum(arrCopy);
+  }
+  if(array.length === 0){
+    return 0;
+  }
+  return arrCopy[0];
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  var flattened = array.flatten();
+  return sum(flattened);
 };
 
 // 4. Check if a number is even.
