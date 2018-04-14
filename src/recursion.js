@@ -53,20 +53,47 @@ var isEven = function(n) {
     return true;
   } else {
     return isEven(abs-2);
-  }
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
-  
+  var result = 0;
+  if(n === 0){
+    return result;
+  } else if(n > 0){
+    result += n-1;
+    return result + sumBelow(n-1);
+  } else if(n < 0){
+    result += n+1;
+    return result + sumBelow(n+1);
+  }
 };
+
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  var result = [];
+  var operator = x < y ? 1 : -1;
+  if(x === y){
+    return result;
+  } else if(x+operator !== y){
+    result.push(x+operator);
+    return result.concat(range(x+operator, y));
+  } else {
+    return result;
+  }
 };
+
+//1: counter = 2; 2 === 9 false; 2+1 !== y true; result[3], result[3].concat(range(3,9))
+//2: counter = 3; 3 === 9 false; 3+1 !== y true; result[4], result[4].concat(range(4,9))
+//3: counter = 4; 4 === 9 false; 4+1 !== y true; result[5], result[5].concat(range(5,9))
+//4: counter = 5; 5 === 9 false; 5+1 !== y true; result[6], result[6].concat(range(6,9))
+//5: counter = 6; 6 === 9 false; 6+1 !== y true; result[7], result[7].concat(range(7,9))
+//6: counter = 7; 7 === 9 false; 7+1 !== y true; result[8], result[8].concat(range(8,9))
+//7: counter = 8; 8 === 9 false; 8+1 !== y false; return result;
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
@@ -74,6 +101,14 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  var result = exp === 0? 1: base;
+  if(exp > 1){
+    return result * exponent(result, exp-1);
+  } else if (exp < 1){
+    return 1/(result / exponent(result, exp+1));
+  } else {
+    return result;
+  }
 };
 
 // 8. Determine if a number is a power of two.
@@ -81,10 +116,18 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if(n < 1){
+    return false;
+  } else if(n === 1){
+    return true;
+  } else {
+    return powerOfTwo(n/2);
+  }
 };
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
+  
 };
 
 // 10. Write a function that determines if a string is a palindrome.
