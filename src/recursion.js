@@ -53,6 +53,7 @@ var isEven = function(n) {
     return true;
   } else {
     return isEven(abs-2);
+  }
 };
 
 // 5. Sum all integers below a given integer.
@@ -328,4 +329,4 @@ var mergeSort = function(array) {
 // console.log(obj2); // {a:1,b:{bb:{bbb:2}},c:3}
 // obj1 === obj2 // false
 var clone = function(input) {
-};
+}
