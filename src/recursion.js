@@ -128,11 +128,31 @@ var powerOfTwo = function(n) {
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
-  
+  var copy = string;
+  var result = "";
+  if(result.length === string.length){
+    return result;
+  } else {
+    result += copy.charAt(copy.length -1);
+    return result += reverse(copy.slice(0, copy.length-1));
+  }
 };
 
 // 10. Write a function that determines if a string is a palindrome.
+
+ //only need to check 0 for true case since if theres only 1 char left, 
+ //that one char will represent both start and end, 
+ //and therefore recursion condition will still run and give us an empty array which evaluates true.
 var palindrome = function(string) {
+  var start = string.substring(0,1);
+  var end = string.substring(string.length-1);
+  if(string.length === 0){
+    return true;
+  } else if (start.toUpperCase() === end.toUpperCase()){
+    return palindrome(string.slice(1,string.length-1))
+  } else {
+    return false;
+  }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -141,7 +161,21 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  var num1 = x<0? -x : x;
+  var num2 = y<0? -y : y;
+  if(num2 === 0){
+    return NaN;
+  } else if(num1 >= num2){
+    return modulo(num1-num2, num2);
+  } else {
+    return x < 0 ? -num1 : num1;
+  }
 };
+
+  // if(x < 0){
+  //   return -modulo(-x, y);
+  // } 
+  // y < 0 ? y = -y : y = y;
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
